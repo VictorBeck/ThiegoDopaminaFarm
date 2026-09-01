@@ -1,0 +1,237 @@
+/* ============================================================
+   THIEGO DOPAMINA FARM — themes.css (v2)
+   Identidade visual propria por tema: body[data-theme] + tokens
+   scoped + camadas de atmosfera. Carregado por ultimo.
+   ============================================================ */
+
+.tdf-ambience { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.tdf-ambience > i { display: block; width: 100%; height: 100%; }
+body[data-theme] #app { position: relative; z-index: 1; }
+
+/* ============ CLASSIC — identidade original (theme.css base) ============ */
+body[data-theme="classic"] .tdf-ambience .tdf-amb-bg {
+  background:
+    radial-gradient(1200px 620px at 50% -10%, rgba(0, 217, 255, .16), transparent 60%),
+    radial-gradient(900px 620px at 92% 118%, rgba(255, 62, 200, .12), transparent 62%),
+    radial-gradient(800px 520px at 4% 100%, rgba(61, 123, 255, .10), transparent 62%);
+}
+body[data-theme="classic"] .tdf-ambience .tdf-amb-vignette {
+  background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0, 0, 10, .55) 100%);
+}
+
+/* ============ NOTURNO — roxo profundo, neblina viva ============ */
+body[data-theme="noturno"] {
+  --bg: #07021a; --bg2: #0d0526; --panel: #140a33; --panel2: #1c1047; --line: #2f2168;
+  --purple: #b46bff; --pink: #d36bff; --cyan: #8d6bff; --blue: #6b4dff;
+  --muted: #9d8fc8; --text: #ece6ff;
+  --bs-body-bg: #07021a; --bs-body-bg-rgb: 7, 2, 26; --bs-body-color: #ece6ff;
+  --bs-border-color: #2f2168; --bs-primary: #b46bff; --bs-primary-rgb: 180, 107, 255;
+}
+body[data-theme="noturno"] .tdf-ambience .tdf-amb-bg {
+  background:
+    radial-gradient(1100px 600px at 78% -8%, rgba(140, 60, 255, .22), transparent 62%),
+    radial-gradient(900px 560px at 8% 104%, rgba(70, 20, 160, .20), transparent 64%),
+    radial-gradient(520px 300px at 42% 44%, rgba(180, 107, 255, .07), transparent 60%);
+  animation: tdfNebulaDrift 26s ease-in-out infinite alternate;
+}
+@keyframes tdfNebulaDrift {
+  0%   { filter: hue-rotate(0deg) brightness(1);    transform: scale(1) translateY(0); }
+  50%  { filter: hue-rotate(18deg) brightness(1.1); transform: scale(1.05) translateY(-1.2%); }
+  100% { filter: hue-rotate(-10deg) brightness(1);  transform: scale(1) translateY(1%); }
+}
+body[data-theme="noturno"] .tdf-ambience .tdf-amb-vignette {
+  background: radial-gradient(120% 95% at 50% 42%, transparent 46%, rgba(2, 0, 12, .78) 100%);
+}
+body[data-theme="noturno"] .farm-thiego {
+  border-color: #6b3fbf;
+  background: radial-gradient(120% 120% at 50% 0%, #241356, #12082e);
+  box-shadow: 0 0 44px rgba(140, 60, 255, .28), inset 0 0 32px rgba(90, 30, 200, .18);
+}
+body[data-theme="noturno"] .farm-thiego .farm-title { color: #d9baff; }
+body[data-theme="noturno"] .hud-value {
+  filter: drop-shadow(0 0 18px rgba(180, 107, 255, .55)) drop-shadow(0 0 42px rgba(90, 30, 200, .3));
+}
+body[data-theme="noturno"] .btn.primary, body[data-theme="noturno"] .btn-gold {
+  background: linear-gradient(180deg, #6b3fbf, #4a2b8f); border-color: #b46bff;
+}
+body[data-theme="noturno"] .meter-fill {
+  background: linear-gradient(90deg, #6b3fbf, #b46bff, #ff3ec8);
+  box-shadow: 0 0 10px rgba(180, 107, 255, .5);
+}
+
+/* ============ COSMICO — azul estelar, poeira de estrelas ============ */
+body[data-theme="cosmico"] {
+  --bg: #010814; --bg2: #03101f; --panel: #06182c; --panel2: #0a2340; --line: #123152;
+  --purple: #00aaff; --pink: #66e0ff; --cyan: #66e0ff; --blue: #3d8bff;
+  --muted: #7fa8cc; --text: #dceeff; --gold: #a8e8ff; --gold2: #66d0ff;
+  --bs-body-bg: #010814; --bs-body-bg-rgb: 1, 8, 20; --bs-body-color: #dceeff;
+  --bs-border-color: #123152; --bs-primary: #00aaff; --bs-primary-rgb: 0, 170, 255;
+}
+body[data-theme="cosmico"] .tdf-ambience .tdf-amb-bg {
+  background:
+    radial-gradient(1000px 560px at 22% -6%, rgba(0, 170, 255, .16), transparent 60%),
+    radial-gradient(900px 620px at 84% 108%, rgba(80, 80, 255, .12), transparent 64%);
+}
+body[data-theme="cosmico"] .tdf-ambience .tdf-amb-stars {
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 22%, rgba(255,255,255,.85), transparent 55%),
+    radial-gradient(1px 1px at 34% 68%, rgba(190,230,255,.7), transparent 55%),
+    radial-gradient(1.6px 1.6px at 58% 14%, rgba(255,255,255,.9), transparent 55%),
+    radial-gradient(1px 1px at 76% 42%, rgba(160,220,255,.65), transparent 55%),
+    radial-gradient(1.2px 1.2px at 88% 76%, rgba(255,255,255,.8), transparent 55%),
+    radial-gradient(1px 1px at 45% 88%, rgba(190,230,255,.6), transparent 55%);
+  background-size: 420px 420px;
+  animation: tdfStarTwinkle 7s ease-in-out infinite alternate;
+}
+@keyframes tdfStarTwinkle {
+  0% { opacity: .45; } 50% { opacity: .9; } 100% { opacity: .55; }
+}
+body[data-theme="cosmico"] .farm-thiego {
+  border-color: #1a5a8f;
+  background: radial-gradient(120% 120% at 50% 0%, #0a2340, #04101f);
+  box-shadow: 0 0 44px rgba(0, 170, 255, .22), inset 0 0 36px rgba(0, 90, 160, .16);
+}
+body[data-theme="cosmico"] .farm-thiego .farm-title { color: #a8e8ff; }
+body[data-theme="cosmico"] .hud-value {
+  filter: drop-shadow(0 0 18px rgba(102, 224, 255, .5)) drop-shadow(0 0 40px rgba(0, 120, 255, .28));
+}
+body[data-theme="cosmico"] .btn.primary, body[data-theme="cosmico"] .btn-gold {
+  background: linear-gradient(180deg, #0a5a9f, #063a6b); border-color: #66e0ff;
+}
+body[data-theme="cosmico"] .meter-fill {
+  background: linear-gradient(90deg, #00aaff, #66e0ff, #b6f2ff);
+  box-shadow: 0 0 10px rgba(102, 224, 255, .45);
+}
+
+/* ============ FOGO — brasa, calor, tremor de luz ============ */
+body[data-theme="fogo"] {
+  --bg: #160300; --bg2: #200500; --panel: #2a0800; --panel2: #380d02; --line: #5c1c06;
+  --purple: #ff6a00; --pink: #ff3d00; --cyan: #ffa040; --blue: #ff5a1f; --green: #ffb020;
+  --muted: #cc9a80; --text: #ffe8dc; --gold: #ffb020; --gold2: #ff7a00;
+  --bs-body-bg: #160300; --bs-body-bg-rgb: 22, 3, 0; --bs-body-color: #ffe8dc;
+  --bs-border-color: #5c1c06; --bs-primary: #ff6a00; --bs-primary-rgb: 255, 106, 0;
+}
+body[data-theme="fogo"] .tdf-ambience .tdf-amb-bg {
+  background:
+    radial-gradient(1100px 600px at 50% 118%, rgba(255, 80, 0, .20), transparent 60%),
+    radial-gradient(800px 480px at 12% -6%, rgba(255, 140, 0, .10), transparent 58%),
+    radial-gradient(600px 380px at 88% 6%, rgba(255, 40, 0, .08), transparent 60%);
+  animation: tdfEmberGlow 9s ease-in-out infinite alternate;
+}
+@keyframes tdfEmberGlow {
+  0% { filter: brightness(.96) saturate(1.05); } 100% { filter: brightness(1.14) saturate(1.2); }
+}
+body[data-theme="fogo"] .farm-thiego {
+  border-color: #a33a08;
+  background: radial-gradient(120% 120% at 50% 0%, #3a0d02, #1c0500);
+  box-shadow: 0 0 48px rgba(255, 90, 0, .30), inset 0 0 40px rgba(255, 60, 0, .14);
+}
+body[data-theme="fogo"] .farm-thiego .farm-title { color: #ffb060; }
+body[data-theme="fogo"] .hud-value {
+  filter: drop-shadow(0 0 18px rgba(255, 140, 0, .55)) drop-shadow(0 0 40px rgba(255, 60, 0, .3));
+}
+body[data-theme="fogo"] .btn.primary, body[data-theme="fogo"] .btn-gold {
+  background: linear-gradient(180deg, #e04a00, #8f2d00); border-color: #ff9a40;
+}
+body[data-theme="fogo"] .meter-fill {
+  background: linear-gradient(90deg, #ff3d00, #ff8c42, #ffd24d);
+  box-shadow: 0 0 10px rgba(255, 106, 0, .5);
+}
+body[data-theme="fogo"] ::selection { background: #ff6a00; color: #1a0500; }
+
+/* ============ VAZIO — preto absoluto, mono, contorno fino ============ */
+body[data-theme="vazio"] {
+  --bg: #000000; --bg2: #030303; --panel: #060606; --panel2: #0a0a0a; --line: #1c1c1c;
+  --purple: #e8e8e8; --pink: #bdbdbd; --cyan: #dcdcdc; --blue: #a8a8a8; --green: #d0d0d0;
+  --gold: #f2f2f2; --gold2: #cfcfcf; --muted: #6e6e6e; --text: #d8d8d8;
+  --bs-body-bg: #000000; --bs-body-bg-rgb: 0, 0, 0; --bs-body-color: #d8d8d8;
+  --bs-border-color: #1c1c1c; --bs-primary: #e8e8e8; --bs-primary-rgb: 232, 232, 232;
+}
+body[data-theme="vazio"] .tdf-ambience .tdf-amb-bg { background: none; }
+body[data-theme="vazio"] .tdf-ambience .tdf-amb-vignette {
+  background: radial-gradient(130% 100% at 50% 45%, transparent 55%, rgba(0,0,0,.9) 100%);
+}
+body[data-theme="vazio"] .farm-thiego {
+  border-color: #3a3a3a;
+  background: radial-gradient(120% 120% at 50% 0%, #0d0d0d, #000);
+  box-shadow: none;
+  filter: grayscale(.35) contrast(1.06);
+}
+body[data-theme="vazio"] .farm-thiego .farm-title { color: #eee; }
+body[data-theme="vazio"] .hud-value {
+  background: none; -webkit-text-fill-color: #fff; filter: none;
+}
+body[data-theme="vazio"] .btn.primary, body[data-theme="vazio"] .btn-gold {
+  background: linear-gradient(180deg, #232323, #0e0e0e); border-color: #555;
+}
+body[data-theme="vazio"] .meter-fill { background: linear-gradient(90deg, #888, #eee); box-shadow: none; }
+
+/* ============ OURO — palacio dourado, luz de riqueza ============ */
+body[data-theme="dourado"] {
+  --bg: #120c00; --bg2: #1a1200; --panel: #241800; --panel2: #332302; --line: #6b5210;
+  --purple: #ffd700; --pink: #ffb300; --cyan: #ffe680; --blue: #ffcf40; --green: #ffd700;
+  --muted: #c8ab6e; --text: #fff3cc;
+  --bs-body-bg: #120c00; --bs-body-bg-rgb: 18, 12, 0; --bs-body-color: #fff3cc;
+  --bs-border-color: #6b5210; --bs-primary: #ffd700; --bs-primary-rgb: 255, 215, 0;
+}
+body[data-theme="dourado"] .tdf-ambience .tdf-amb-bg {
+  background:
+    radial-gradient(1000px 560px at 50% -8%, rgba(255, 215, 0, .14), transparent 62%),
+    radial-gradient(820px 520px at 88% 106%, rgba(255, 160, 0, .12), transparent 62%),
+    radial-gradient(500px 320px at 6% 100%, rgba(255, 230, 128, .07), transparent 58%);
+}
+body[data-theme="dourado"] .farm-thiego {
+  border-color: #b08c1e;
+  background: radial-gradient(120% 120% at 50% 0%, #3a2a05, #1c1300);
+  box-shadow: 0 0 46px rgba(255, 200, 0, .26), inset 0 0 36px rgba(255, 170, 0, .14);
+}
+body[data-theme="dourado"] .farm-thiego .farm-title { color: #ffe680; }
+body[data-theme="dourado"] .btn.primary, body[data-theme="dourado"] .btn-gold {
+  background: linear-gradient(180deg, #e8b400, #8f6d00); border-color: #ffd700;
+}
+body[data-theme="dourado"] .meter-fill {
+  background: linear-gradient(90deg, #ffcf40, #ffd700, #fff3b0);
+  box-shadow: 0 0 10px rgba(255, 215, 0, .5);
+}
+
+/* ============ THIEGO ABSOLUTO — magenta eletrico, caos ============ */
+body[data-theme="thiego"] {
+  --bg: #0a0014; --bg2: #120020; --panel: #1c0033; --panel2: #280050; --line: #4d0a8f;
+  --purple: #ff00ff; --pink: #ff44ff; --cyan: #ff66ff; --blue: #cc44ff; --green: #ff88ff;
+  --gold: #ff00ff; --gold2: #ff66ff; --muted: #c48fd4; --text: #ffeaff;
+  --bs-body-bg: #0a0014; --bs-body-bg-rgb: 10, 0, 20; --bs-body-color: #ffeaff;
+  --bs-border-color: #4d0a8f; --bs-primary: #ff00ff; --bs-primary-rgb: 255, 0, 255;
+}
+body[data-theme="thiego"] .tdf-ambience .tdf-amb-bg {
+  background:
+    radial-gradient(1000px 560px at 30% -8%, rgba(255, 0, 255, .17), transparent 60%),
+    radial-gradient(860px 560px at 82% 108%, rgba(120, 0, 255, .16), transparent 62%);
+  animation: tdfChaosPulse 12s ease-in-out infinite alternate;
+}
+@keyframes tdfChaosPulse {
+  0% { filter: hue-rotate(0deg) saturate(1.1); }
+  33% { filter: hue-rotate(14deg) saturate(1.3); }
+  66% { filter: hue-rotate(-12deg) saturate(1.2); }
+  100% { filter: hue-rotate(8deg) saturate(1.35); }
+}
+body[data-theme="thiego"] .farm-thiego {
+  border-color: #b400b4;
+  background: radial-gradient(120% 120% at 50% 0%, #38005a, #16002a);
+  box-shadow: 0 0 52px rgba(255, 0, 255, .32), inset 0 0 40px rgba(160, 0, 220, .2);
+}
+body[data-theme="thiego"] .farm-thiego .farm-title { color: #ff8cff; }
+body[data-theme="thiego"] .hud-value {
+  filter: drop-shadow(0 0 20px rgba(255, 0, 255, .6)) drop-shadow(0 0 44px rgba(120, 0, 255, .35));
+}
+body[data-theme="thiego"] .btn.primary, body[data-theme="thiego"] .btn-gold {
+  background: linear-gradient(180deg, #a800a8, #5a005a); border-color: #ff00ff;
+}
+body[data-theme="thiego"] .meter-fill {
+  background: linear-gradient(90deg, #ff00ff, #b400ff, #ff44ff);
+  box-shadow: 0 0 10px rgba(255, 0, 255, .55);
+}
+body[data-theme="thiego"] ::selection { background: #ff00ff; color: #16002a; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tdf-ambience .tdf-amb-bg, .tdf-ambience .tdf-amb-stars { animation: none !important; }
+}

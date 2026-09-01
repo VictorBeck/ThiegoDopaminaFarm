@@ -1,0 +1,595 @@
+/* ============================================================
+   THIEGO DOPAMINA FARM — expansion.css
+   Estilos da expansão: HUD do servidor, coleção, batalhas, PvP,
+   loot, inventário e genealogia. Segue o tema do jogo.
+   ============================================================ */
+
+/* ---------- HUD da expansão ---------- */
+.exp-hud {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  padding: 8px 10px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 16px;
+  margin-top: 8px;
+}
+.exp-chip {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 999px; padding: 4px 12px;
+  font-size: 12px; color: var(--text); line-height: 1.2;
+  position: relative;
+}
+.exp-chip b { color: var(--gold); font-weight: 900; letter-spacing: .02em; }
+.exp-chip-lbl { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+.exp-chip-sub { color: var(--muted); font-size: 10px; min-width: 34px; }
+.exp-chip-lvl { flex-direction: column; align-items: flex-start; gap: 2px; }
+.exp-chip-lvl .exp-chip-sub { min-width: 0; white-space: nowrap; }
+.exp-xpbar {
+  width: 90px; height: 5px; border-radius: 999px;
+  background: var(--bg2); border: 1px solid var(--line); overflow: hidden;
+}
+.exp-xpbar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold2), var(--gold)); border-radius: 999px; transition: width .3s; }
+.exp-chip-claim { cursor: pointer; border-style: dashed; transition: all .15s; }
+.exp-chip-claim:hover { border-color: var(--gold); }
+.exp-chip-claim.has { border-color: var(--gold); background: rgba(255, 215, 0, .12); animation: expPulse 1.6s ease-in-out infinite; }
+@keyframes expPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+  50% { box-shadow: 0 0 14px 2px rgba(255, 215, 0, .45); }
+}
+.exp-chip-claim.has b { color: var(--gold); }
+.exp-chip-rating b { color: var(--purple); }
+.exp-chip-user { cursor: pointer; color: var(--muted); }
+.exp-chip-user:hover { color: var(--text); border-color: var(--purple); }
+.exp-hud-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.exp-hud-dot.on { background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+/* ---------- estrutura das abas ---------- */
+.exp-tab { padding: 12px 0; }
+.exp-head {
+  font-size: 15px; font-weight: 900; letter-spacing: .06em; color: var(--text);
+  display: flex; flex-direction: column; gap: 2px; margin-bottom: 10px;
+}
+.exp-head .hl { color: var(--gold); }
+.exp-head-sub { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: .03em; }
+.exp-summary { font-size: 12.5px; color: var(--text); margin: 6px 0 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.exp-summary .hl { color: var(--gold); }
+.exp-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.exp-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.exp-fbtn {
+  background: var(--bg2); border: 1px solid var(--line); color: var(--muted);
+  border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 800;
+  cursor: pointer; transition: all .12s;
+}
+.exp-fbtn:hover { color: var(--text); }
+.exp-fbtn.active { color: #1a1200; background: linear-gradient(135deg, var(--gold2), var(--gold)); border-color: transparent; }
+.exp-fsel {
+  background: var(--bg2); border: 1px solid var(--line); color: var(--text);
+  border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 800;
+  cursor: pointer; outline: none; max-width: 160px;
+}
+.exp-empty { color: var(--muted); font-size: 12.5px; padding: 14px 4px; }
+.exp-banner {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px 16px; margin-bottom: 12px; background: var(--panel);
+}
+.exp-banner.win { border-color: var(--green); background: rgba(94, 255, 177, .08); }
+.exp-banner.lose { border-color: var(--red); background: rgba(255, 94, 108, .08); }
+.exp-banner.draw { border-color: var(--gold2); background: rgba(255, 179, 0, .08); }
+.exp-banner.locked { border-color: var(--line); }
+.exp-banner-title { font-weight: 900; font-size: 15px; color: var(--text); letter-spacing: .05em; }
+.exp-banner-sub { font-size: 12.5px; color: var(--text); margin-top: 4px; }
+.exp-banner-sub.muted { color: var(--muted); }
+.exp-banner-img { margin-top: 8px; }
+.exp-banner-img img { width: 48px; height: 48px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); }
+.exp-forced { color: var(--gold); font-size: 11px; border: 1px solid var(--gold); border-radius: 999px; padding: 1px 8px; vertical-align: middle; }
+.exp-delta.up { color: var(--green); }
+.exp-delta.down { color: var(--red); }
+.exp-battle-btns { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+/* ---------- autenticação ---------- */
+.exp-auth { display: flex; flex-direction: column; gap: 14px; max-width: 440px; margin: 20px auto; }
+.exp-auth-net { text-align: center; }
+.exp-auth-title { font-size: 18px; font-weight: 900; letter-spacing: .08em; color: var(--gold); }
+.exp-auth-sub { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.exp-auth-tabs { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
+.exp-auth-btn {
+  background: var(--bg2); border: 1px solid var(--line); color: var(--muted);
+  border-radius: 999px; padding: 7px 18px; font-size: 12px; font-weight: 800; cursor: pointer;
+}
+.exp-auth-btn.active { color: #1a1200; background: linear-gradient(135deg, var(--gold2), var(--gold)); border-color: transparent; }
+.exp-auth-form .exp-auth-fields { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.exp-auth-form .imp-box { width: 100%; }
+.exp-auth-form .btn { width: 100%; }
+
+/* ---------- grid de cards (thiegos / loot / inventário) ---------- */
+.exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 10px; }
+.exp-grid.inv { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+.exp-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 10px; display: flex; flex-direction: column; gap: 6px;
+  transition: transform .12s, box-shadow .12s;
+}
+.exp-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.exp-card.boss { background: linear-gradient(180deg, rgba(255, 94, 108, .10), var(--panel)); }
+.exp-card.owned { box-shadow: inset 0 0 0 1px rgba(255, 215, 0, .25); }
+.exp-card.locked { opacity: .6; }
+.exp-card-head { display: flex; align-items: center; gap: 6px; min-height: 18px; }
+.exp-badge {
+  font-size: 9px; font-weight: 900; letter-spacing: .1em;
+  padding: 2px 8px; border-radius: 999px; border: 1px solid; display: inline-block;
+}
+.r-rainbow { background: linear-gradient(90deg, rgba(255,94,108,.25), rgba(255,215,0,.25), rgba(94,255,177,.25), rgba(94,168,255,.25), rgba(200,107,255,.25)) !important; }
+.exp-boss-tag {
+  font-size: 9px; font-weight: 900; color: #fff; background: var(--red);
+  padding: 2px 8px; border-radius: 999px; letter-spacing: .08em;
+}
+.exp-card-img { display: flex; justify-content: center; align-items: center; min-height: 96px; }
+.exp-card-img img { width: 88px; height: 88px; aspect-ratio: 1/1; object-fit: cover; border-radius: 16px; border: 1px solid var(--line); }
+.exp-emoji { display: flex; align-items: center; justify-content: center; }
+.exp-card-img .exp-emoji { font-size: 52px; line-height: 1; }
+.exp-eq-ic.exp-emoji { font-size: 22px; width: 34px; height: 34px; }
+.exp-banner-img .exp-emoji { font-size: 42px; }
+.exp-card-name { font-size: 12.5px; font-weight: 800; color: var(--text); text-align: center; line-height: 1.3; }
+.exp-card-meta { display: flex; justify-content: center; gap: 6px; font-size: 10px; flex-wrap: wrap; }
+.exp-type {
+  color: var(--purple); font-weight: 800; background: rgba(200, 107, 255, .12);
+  border-radius: 999px; padding: 2px 8px; letter-spacing: .05em;
+}
+.exp-role {
+  color: var(--muted); font-weight: 700; background: var(--bg2);
+  border-radius: 999px; padding: 2px 8px; letter-spacing: .05em;
+}
+.exp-card-lvl { text-align: center; font-size: 11px; font-weight: 900; color: var(--gold2); letter-spacing: .06em; }
+.exp-card-unlock { text-align: center; font-size: 11px; color: var(--muted); padding: 4px 0; }
+.exp-card-unlock.ready { color: var(--green); font-weight: 700; }
+.exp-card-desc { font-size: 10.5px; color: var(--muted); text-align: center; line-height: 1.4; }
+.exp-card-quote { font-size: 10px; font-style: italic; color: var(--purple); text-align: center; line-height: 1.4; }
+.exp-card-abilities { margin-top: 4px; border-top: 1px dashed var(--line); padding-top: 6px; }
+.exp-card-abil-title { font-size: 9px; font-weight: 900; letter-spacing: .1em; color: var(--gold2); text-align: center; margin-bottom: 3px; }
+.exp-card-abil { font-size: 10px; color: var(--text); line-height: 1.35; text-align: left; padding: 2px 4px; }
+.exp-card-abil b { color: var(--gold); }
+.exp-card-abil .muted { font-size: 9.5px; }
+.exp-card-btns { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: auto; }
+.exp-card-btns .btn { font-size: 10px; padding: 6px 10px; }
+.exp-stats-row { font-size: 10.5px; color: var(--text); text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+.exp-stats-row b { color: var(--gold); }
+.exp-stats-row .sep { color: var(--line); }
+.exp-effects { font-size: 10px; color: var(--muted); text-align: center; }
+.exp-effects span { color: var(--green); }
+.exp-qty { color: var(--gold); font-size: 11px; }
+
+/* ---------- painéis ---------- */
+.exp-panel {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px; margin-bottom: 12px;
+}
+.exp-panel-title { font-size: 11px; font-weight: 900; letter-spacing: .1em; color: var(--gold); margin-bottom: 10px; }
+
+/* ---------- modos de batalha ---------- */
+.exp-modes { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.exp-mode {
+  flex: 1; min-width: 110px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px 8px; cursor: pointer; transition: all .12s;
+}
+.exp-mode b { font-size: 13px; letter-spacing: .08em; color: var(--text); }
+.exp-mode span { font-size: 10.5px; color: var(--muted); }
+.exp-mode:hover { border-color: var(--purple); }
+.exp-mode.active { border-color: var(--gold); background: rgba(255, 215, 0, .08); box-shadow: 0 0 10px rgba(255, 215, 0, .15); }
+.exp-mode.active b { color: var(--gold); }
+.exp-mode.locked { opacity: .55; cursor: not-allowed; }
+.exp-team-host { display: flex; flex-direction: column; gap: 10px; }
+.exp-team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+.exp-team-card {
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+  padding: 8px; display: flex; gap: 6px; align-items: flex-start; position: relative;
+  transition: all .12s;
+}
+.exp-team-card.on { border-color: var(--gold); background: rgba(255, 215, 0, .08); }
+.exp-team-cb { margin-top: 4px; accent-color: var(--gold); }
+.exp-team-body { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; flex: 1; }
+.exp-team-ic { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+.exp-team-name { font-size: 10.5px; font-weight: 800; color: var(--text); text-align: center; }
+.exp-team-meta { font-size: 9.5px; color: var(--muted); }
+.exp-start { width: 100%; margin-top: 4px; }
+.exp-boss-sel {
+  background: var(--bg2); color: var(--text); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px; font-size: 12.5px; width: 100%;
+}
+.exp-boss-sel:focus { outline: none; border-color: var(--purple); }
+
+/* ---------- VS / resultado ---------- */
+.exp-vs {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px; margin-bottom: 12px;
+}
+.exp-vs-side { display: flex; flex-direction: column; gap: 8px; flex: 1; align-items: center; transition: transform .15s; }
+.exp-vs-side.flash { transform: scale(1.02); }
+.exp-vs-lbl { font-size: 10px; font-weight: 900; letter-spacing: .12em; color: var(--muted); }
+.exp-vs-names { font-size: 12.5px; font-weight: 800; color: var(--text); text-align: center; }
+.exp-vs-x {
+  font-size: 22px; font-weight: 900; color: var(--red); font-style: italic;
+  text-shadow: 0 0 12px rgba(255, 94, 108, .6);
+}
+.exp-fighter { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 100%; max-width: 180px; }
+.exp-fighter .exp-team-ic { width: 52px; height: 52px; aspect-ratio: 1/1; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); }
+.exp-fighter-name { font-size: 11.5px; font-weight: 800; color: var(--text); text-align: center; }
+.exp-fighter-lvl { color: var(--gold); font-size: 9.5px; }
+.exp-hpbar { width: 100%; height: 9px; border-radius: 5px; background: var(--bg2); border: 1px solid var(--line); overflow: hidden; }
+.exp-hpbar i { display: block; height: 100%; width: 100%; border-radius: 4px; background: var(--hp-ok, #4ade80); transition: width .2s; }
+.exp-hpnum { font-size: 9.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.exp-phase { color: var(--gold); font-size: 12px; font-weight: 900; }
+.exp-battle-log {
+  max-height: 210px; overflow-y: auto; background: var(--bg2); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 3px;
+}
+.exp-log-entry { font-size: 11.5px; color: var(--text); line-height: 1.45; padding: 2px 6px; border-radius: 6px; background: var(--bg2); }
+.exp-log-entry.sys { color: var(--muted); font-style: italic; background: transparent; text-align: center; }
+.exp-log-entry.me { border-left: 3px solid var(--green); }
+.exp-log-entry.en { border-left: 3px solid var(--red); }
+
+/* ---------- missões ---------- */
+.exp-missions { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
+.exp-mission {
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+  padding: 10px; display: flex; flex-direction: column; gap: 5px;
+}
+.exp-mission.done { border-color: var(--green); }
+.exp-mission-name { font-size: 12px; font-weight: 800; color: var(--text); }
+.exp-mission-desc { font-size: 10.5px; color: var(--muted); line-height: 1.4; }
+.exp-mission-bar { height: 5px; border-radius: 3px; background: var(--bg2); border: 1px solid var(--line); overflow: hidden; }
+.exp-mission-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--green), var(--gold2)); border-radius: 3px; transition: width .3s; }
+.exp-mission-meta { font-size: 10px; color: var(--muted); }
+.exp-mission .btn { align-self: flex-end; margin-top: 4px; }
+.exp-mission-claimed { font-size: 10.5px; color: var(--green); font-weight: 800; align-self: flex-end; letter-spacing: .06em; }
+
+/* ---------- PvP ---------- */
+.exp-pvp-stats {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px;
+  margin-bottom: 12px;
+}
+.exp-pvp-stat {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 10px; display: flex; flex-direction: column; gap: 3px; align-items: center;
+}
+.exp-pvp-stat span { font-size: 9.5px; font-weight: 800; letter-spacing: .1em; color: var(--muted); }
+.exp-pvp-stat b { font-size: 16px; color: var(--text); }
+.exp-pvp-stat b.hl { color: var(--purple); }
+
+/* ---------- loot ---------- */
+.exp-pity { font-size: 10px; color: var(--muted); text-align: center; }
+.exp-pity b { color: var(--gold2); }
+
+/* ---------- leaderboard (pvp) ---------- */
+.exp-lb { display: flex; flex-direction: column; gap: 4px; }
+.exp-lb-row {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 10px;
+  padding: 7px 10px; font-size: 12px;
+}
+.exp-lb-row.me { border-color: var(--gold); background: rgba(255, 215, 0, .08); }
+.exp-lb-rank { width: 30px; font-weight: 900; color: var(--gold); }
+.exp-lb-name { flex: 1; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.exp-lb-val { color: var(--purple); font-weight: 800; }
+.exp-lb-val small { color: var(--muted); }
+.exp-lb-rec { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.exp-hist-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+/* ---------- equipamento ---------- */
+.exp-eq-list { display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow-y: auto; }
+.exp-eq-row {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px;
+}
+.exp-eq-ic { width: 34px; height: 34px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+.exp-eq-info { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.exp-eq-name { font-size: 12.5px; font-weight: 800; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.exp-eq-meta { font-size: 10px; color: var(--muted); }
+.exp-eq-cmp { font-size: 10.5px; color: var(--text); line-height: 1.5; }
+.exp-eq-cmp .up { color: var(--green); font-weight: 800; }
+.exp-eq-cmp .down { color: var(--red); font-weight: 800; }
+.exp-modal-body { display: flex; flex-direction: column; gap: 10px; }
+.exp-modal-title { font-weight: 900; font-size: 15px; color: var(--gold); letter-spacing: .05em; }
+
+/* ---------- genealogia ---------- */
+.exp-gene { display: flex; flex-direction: column; gap: 4px; }
+.exp-gene-scroll {
+  overflow: auto; border: 1px solid var(--line); border-radius: var(--radius);
+  background:
+    radial-gradient(600px 400px at 50% 30%, rgba(0, 217, 255, .06), transparent 60%),
+    radial-gradient(400px 300px at 20% 70%, rgba(255, 62, 200, .04), transparent 60%),
+    var(--bg2);
+  cursor: grab; max-height: 65vh; position: relative;
+}
+.exp-gene-scroll.panning { cursor: grabbing; user-select: none; }
+.exp-gene-world { position: relative; }
+.exp-gene-canvas { position: relative; transform-origin: 0 0; transition: transform .1s ease-out; }
+.exp-gene-zoom { display: flex; align-items: center; gap: 6px; margin: 6px 0; flex-wrap: wrap; }
+.exp-gene-zoom .btn { min-width: 32px; }
+.exp-gene-zoom-lbl { font-size: 11px; font-weight: 800; color: var(--muted); min-width: 42px; text-align: center; }
+.exp-gene-tip {
+  position: fixed; z-index: 9999; max-width: 260px;
+  background: linear-gradient(180deg, #0f1b33, #0a1224);
+  border: 1px solid rgba(0, 217, 255, .3); border-radius: 12px;
+  padding: 10px 12px; display: flex; flex-direction: column; gap: 4px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .5), 0 0 20px rgba(0, 217, 255, .1);
+  pointer-events: none;
+}
+.exp-gene-tip-name { font-size: 13px; font-weight: 900; color: var(--gold); }
+.exp-gene-tip-eff { font-size: 11px; color: var(--green); font-weight: 700; }
+.exp-gene-tip-lvl { font-size: 10.5px; color: var(--cyan); font-weight: 700; }
+.exp-gene-tip-cost { font-size: 10.5px; color: var(--gold); }
+.exp-gene-tip-req { font-size: 10.5px; color: var(--red); }
+.exp-gene-node {
+  background: linear-gradient(180deg, rgba(15, 27, 51, .9), rgba(10, 18, 36, .95));
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 10px 8px; display: flex; flex-direction: column; gap: 4px; align-items: center; text-align: center;
+  transition: border-color .2s, box-shadow .3s, transform .15s;
+}
+.exp-gene-node.owned {
+  border-color: rgba(0, 217, 255, .5);
+  box-shadow: 0 0 12px rgba(0, 217, 255, .25), 0 0 30px rgba(0, 217, 255, .1);
+}
+.exp-gene-node.locked { opacity: .4; filter: grayscale(.3); }
+.exp-gene-node:not(.locked):not(.owned):hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(255, 215, 0, .25);
+  transform: translateY(-2px);
+}
+.exp-gene-ic { font-size: 24px; line-height: 1; filter: drop-shadow(0 0 6px rgba(255, 215, 0, .3)); }
+.exp-gene-node.owned .exp-gene-ic { filter: drop-shadow(0 0 8px rgba(0, 217, 255, .4)); }
+.exp-gene-name { font-size: 11px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.exp-gene-eff { font-size: 9.5px; color: var(--green); font-weight: 700; }
+.exp-gene-lvl { font-size: 9px; color: var(--cyan); font-weight: 700; }
+.exp-gene-req { font-size: 9px; color: var(--red); }
+.exp-gene-node .btn { width: 100%; font-size: 10px; padding: 3px 6px; }
+
+/* ---------- ranking com toggle ---------- */
+.exp-lb-toggle { display: flex; gap: 6px; margin-bottom: 8px; }
+.exp-lb-toggle .btn { flex: 1; opacity: .6; }
+.exp-lb-toggle .btn.active { opacity: 1; border-color: var(--green); color: var(--green); }
+
+/* ---------- perfil da expansão ---------- */
+.exp-prof-wrap { margin-top: 14px; }
+.exp-prof-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px; margin-top: 10px;
+}
+.exp-prof-stat {
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 10px;
+  padding: 8px 10px; display: flex; flex-direction: column; gap: 3px;
+}
+.exp-prof-stat > span { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; color: var(--muted); }
+.exp-prof-stat > b { font-size: 14px; color: var(--text); }
+.exp-prof-stat > b small { font-size: 10px; color: var(--muted); font-weight: 700; }
+.exp-prof-xp .exp-mission-bar { margin-top: 4px; }
+.exp-prof-sub { font-size: 9.5px; color: var(--muted); }
+
+@media (max-width: 640px) {
+  .exp-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .exp-hud { gap: 4px; padding: 6px 8px; }
+  .exp-chip { padding: 3px 9px; font-size: 11px; }
+}
+
+/* ============================================================
+   BATALHA MANUAL (estilo Pok�mon)
+   ============================================================ */
+.exp-auto-toggle { display: flex; gap: 8px; margin: 4px 0 12px; }
+.exp-auto-toggle .exp-mode { flex: 1; }
+.exp-auto-toggle .exp-mode b { font-size: 14px; }
+.exp-auto-toggle .exp-mode span { font-size: 11px; }
+
+.exp-arena { display: flex; flex-direction: column; gap: 10px; }
+.exp-arena-scene {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(255,215,0,.06), transparent 60%),
+    linear-gradient(180deg, #0a1428 0%, #0d1b33 45%, #12233f 100%);
+  border: 1px solid rgba(255,215,0,.18);
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: inset 0 0 60px rgba(0,0,0,.4), 0 8px 30px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.exp-arena-scene::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+.exp-arena-top, .exp-arena-bottom {
+  display: flex; align-items: flex-end; gap: 12px; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+.exp-poke-sprite { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.exp-poke-sprite .exp-poke-img {
+  width: 110px; height: 110px; object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(255,215,0,.25));
+  animation: pokeBob 2.6s ease-in-out infinite;
+}
+.exp-poke-sprite.enemy .exp-poke-img { transform: scaleX(-1); }
+.exp-poke-sprite.me .exp-poke-img { animation-delay: -1.3s; }
+@keyframes pokeBob { 0%,100% { transform: translateY(0) scaleX(-1); } 50% { transform: translateY(-6px) scaleX(-1); } }
+.exp-poke-sprite.me .exp-poke-img { animation-name: pokeBobMe; }
+@keyframes pokeBobMe { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.exp-poke-type {
+  font-size: 9px; font-weight: 900; letter-spacing: .08em;
+  color: var(--cyan); background: rgba(0,217,255,.08);
+  padding: 2px 8px; border-radius: 20px; border: 1px solid rgba(0,217,255,.25);
+}
+.exp-poke-panel {
+  background: rgba(8,14,28,.85);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 180px;
+  flex: 1;
+  box-shadow: 0 4px 18px rgba(0,0,0,.35);
+}
+.exp-poke-name { font-weight: 900; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.exp-poke-lvl { font-size: 10px; color: var(--green); font-weight: 800; }
+.exp-poke-rarity { font-size: 9px; color: var(--gold); font-weight: 800; margin-left: auto; }
+.exp-hpbar.big { height: 14px; border-radius: 8px; overflow: hidden; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15); }
+.exp-hpbar.big i { display: block; height: 100%; border-radius: 7px; background: var(--hp-ok,#4ade80); transition: width .35s ease, background .3s; }
+.exp-hpnum { font-size: 11px; font-weight: 800; color: var(--muted); margin-top: 3px; text-align: right; }
+
+.exp-arena-logwrap {
+  flex: 1; min-height: 90px; max-height: 150px;
+  background: rgba(0,0,0,.35);
+  border-radius: 12px; border: 1px solid rgba(255,255,255,.08);
+  padding: 6px;
+  position: relative; z-index: 1;
+}
+.exp-battle-log { max-height: 120px; overflow-y: auto; font-size: 11.5px; display: flex; flex-direction: column; gap: 2px; }
+.exp-log-entry { padding: 2px 8px; border-radius: 6px; }
+.exp-log-entry.me { color: #7dffb2; }
+.exp-log-entry.en { color: #ff9b9b; }
+.exp-log-entry.sys { color: var(--gold); font-style: italic; }
+
+.exp-manual-ctl { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.exp-poke-menu {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+}
+.exp-poke-menu-btn {
+  min-height: 64px;
+  background: linear-gradient(180deg, rgba(255,215,0,.10), rgba(255,215,0,.03));
+  border: 1px solid rgba(255,215,0,.28);
+  border-radius: 14px;
+  font-size: 15px; font-weight: 900;
+  transition: transform .12s ease, box-shadow .12s ease, background .15s;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+}
+.exp-poke-menu-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(255,215,0,.18); background: linear-gradient(180deg, rgba(255,215,0,.16), rgba(255,215,0,.05)); }
+.exp-poke-menu-btn b { font-size: 15px; }
+.exp-manual-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+.exp-ab-btn {
+  display: flex; flex-direction: column; gap: 3px; align-items: center; justify-content: center;
+  min-height: 58px;
+  background: rgba(0,217,255,.06);
+  border: 1px solid rgba(0,217,255,.22);
+  border-radius: 12px;
+}
+.exp-ab-btn b { font-size: 13px; }
+.exp-ab-btn small { font-size: 10px; color: var(--muted); font-weight: 700; }
+.exp-ab-btn.active { border-color: var(--green); background: rgba(74,222,128,.12); }
+.exp-manual-prompt { font-size: 13px; font-weight: 800; color: var(--gold); }
+.exp-manual-autobar { display: flex; gap: 8px; }
+.exp-manual-autobar .btn { flex: 1; }
+
+/* ============================================================
+   SOCIAL (amigos + party)
+   ============================================================ */
+.exp-social { display: grid; gap: 14px; }
+.exp-social-body { display: grid; gap: 10px; }
+.exp-social-section { display: grid; gap: 6px; }
+.exp-social-sec-title { font-size: 12px; font-weight: 900; letter-spacing: .05em; color: var(--gold); margin-top: 6px; }
+.exp-social-empty { font-size: 12px; color: var(--muted); padding: 4px 2px; }
+.exp-social-add { display: flex; gap: 8px; margin-bottom: 8px; }
+.exp-social-add .imp-box { flex: 1; }
+.exp-social-row {
+  display: flex; align-items: center; gap: 8px; justify-content: space-between;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 10px;
+  padding: 7px 10px;
+}
+.exp-social-name { font-weight: 700; font-size: 13px; }
+.exp-social-btns { display: flex; gap: 6px; flex-shrink: 0; }
+.exp-social-pending { font-size: 10px; color: var(--muted); font-style: italic; }
+.exp-party-code { font-size: 12px; color: var(--cyan); margin-left: 8px; }
+.exp-party-code b { letter-spacing: 2px; }
+.exp-party-leader { font-size: 10px; color: var(--gold); font-weight: 900; }
+.exp-party-members { display: grid; gap: 6px; margin-top: 8px; }
+
+/* ============================================================
+   SURVIVAL + DAILY BOSS
+   ============================================================ */
+/* daily boss card */
+.exp-daily-panel { border-color: rgba(255,215,0,.35); background: linear-gradient(180deg, rgba(255,215,0,.06), rgba(255,215,0,.01)); }
+.exp-daily-body { display: flex; align-items: center; gap: 14px; }
+.exp-daily-img {
+  width: 76px; height: 76px; object-fit: cover; border-radius: 14px;
+  border: 2px solid rgba(255,215,0,.45); box-shadow: 0 0 14px rgba(255,215,0,.2);
+  background: rgba(0,0,0,.3);
+}
+.exp-daily-name { font-size: 16px; font-weight: 900; color: var(--text); letter-spacing: .02em; }
+.exp-daily-quote { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 4px; }
+.exp-daily-status {
+  margin-top: 8px; display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: .04em;
+  color: var(--green); background: rgba(74,222,128,.1);
+  border: 1px solid rgba(74,222,128,.25); border-radius: 999px; padding: 4px 10px;
+}
+.exp-daily-status.done { color: var(--muted); background: rgba(255,255,255,.04); border-color: var(--line); }
+
+/* survival */
+.exp-survival-status {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: linear-gradient(90deg, rgba(0,217,255,.12), rgba(124,58,237,.10));
+  border: 1px solid rgba(0,217,255,.28);
+  border-radius: 12px; padding: 10px 14px; margin-bottom: 12px;
+}
+.exp-survival-wave { font-size: 15px; font-weight: 900; color: var(--cyan, #00d9ff); letter-spacing: .06em; }
+.exp-survival-rewards { font-size: 12px; font-weight: 800; color: var(--gold); }
+.exp-boss-badge {
+  font-size: 10px; font-weight: 900; letter-spacing: .08em;
+  color: #ff5e6c; background: rgba(255,94,108,.14);
+  border: 1px solid rgba(255,94,108,.4); border-radius: 999px; padding: 2px 8px;
+  vertical-align: middle;
+}
+.exp-survival-retire { width: 100%; margin-top: 4px; }
+
+/* badge de tipo dos Thiegos */
+.exp-type-badge {
+  display: inline-block;
+  font-size: 9.5px; font-weight: 800; letter-spacing: .04em;
+  border: 1px solid; border-radius: 999px; padding: 1px 7px;
+  background: rgba(0,0,0,.25); white-space: nowrap; vertical-align: middle;
+}
+.exp-type-badge.mini { font-size: 9px; padding: 0 5px; }
+.exp-team-meta .exp-type-badge { margin-left: 2px; }
+.exp-fighter-name .exp-type-badge { font-size: 8.5px; }
+.exp-poke-type .exp-type-badge { font-size: 10px; border-width: 2px; }
+
+/* ============================================================
+   GUIA DE TIPOS (type chart grid)
+   ============================================================ */
+.exp-type-panel { margin-top: 8px; }
+.exp-type-body { overflow-x: auto; }
+.exp-type-grid {
+  display: grid;
+  grid-template-columns: 50px repeat(8, 48px);
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 430px;
+}
+.exp-type-cell {
+  display: flex; align-items: center; justify-content: center;
+  height: 32px; border-radius: 6px; background: rgba(255,255,255,.04);
+  color: var(--muted); font-size: 10.5px;
+}
+.exp-type-cell.head { background: transparent; color: var(--text); font-size: 10px; }
+.exp-type-cell.w { background: rgba(74,222,128,.15); color: #4ade80; }
+.exp-type-cell.l { background: rgba(248,113,113,.15); color: #f87171; }
+.exp-type-cell.s { background: rgba(255,215,0,.10); color: #ffd700; }
+.exp-type-cell.n { color: rgba(255,255,255,.25); }
+.exp-type-cell.mine { outline: 2px solid rgba(255,215,0,.35); outline-offset: -2px; }
+.exp-type-grid .exp-type-badge.mini { font-size: 10px; }
+.exp-type-legend {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  font-size: 10.5px; font-weight: 700; color: var(--muted);
+}
+.exp-type-legend span { padding: 2px 6px; border-radius: 4px; }
+.exp-type-legend .w { color: #4ade80; background: rgba(74,222,128,.08); }
+.exp-type-legend .s { color: #ffd700; background: rgba(255,215,0,.08); }
+.exp-type-legend .l { color: #f87171; background: rgba(248,113,113,.08); }
+.exp-type-legend .mine-tag { color: var(--gold); background: rgba(255,215,0,.08); padding: 2px 6px; border-radius: 4px; }

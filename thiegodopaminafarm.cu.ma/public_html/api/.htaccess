@@ -1,0 +1,22 @@
+# THIEGO DOPAMINA FARM — proteção dos arquivos sensíveis da API
+# Bloqueia por extensão (.env, .log, .sql, .bak, .ini, .phps, .md, .json)
+<FilesMatch "\.(env|log|sql|bak|ini|phps|md|json|lock|phar)$">
+  Require all denied
+</FilesMatch>
+
+# Bloqueia arquivos de manutenção/seed/recuperação por nome
+<FilesMatch "^(seed|restore_saves|tdf_recover|tdf_diag|setup|install|migrate|console|debug|test|backup|recover)\.(php?)?$">
+  Require all denied
+</FilesMatch>
+
+# Bloqueia arquivos conhecidos sem extensão (credenciais, config vazadas)
+<FilesMatch "^(download|download .*|\.env\..*)$">
+  Require all denied
+</FilesMatch>
+
+# Bloqueia qualquer arquivo sem extensão na raiz da API (exceto os legítimos)
+<FilesMatch "^[^.]+$">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes

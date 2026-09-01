@@ -1,0 +1,193 @@
+/* ============================================================
+   THIEGO DOPAMINA FARM — identity.css
+   Identidade visual: tipografia, hero, HUD, tabs, affordance.
+   Carregado por último: overrides por cima dos estilos base.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --shadow: 0 4px 18px rgba(0, 0, 0, .38);
+  /* --font/--font-display vivem APENAS em theme.css (:root) — eram
+     duplicadas aqui com valores idênticos e o theme sempre vencia;
+     o @import abaixo ainda é quem carrega as fontes do Google. */
+  --gold-soft: rgba(255, 215, 0, .16);
+}
+
+body { letter-spacing: .01em; }
+
+.hud-value {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 6.4vw, 46px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #fff7c2, var(--gold) 55%, var(--gold2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 16px rgba(255, 215, 0, .35));
+}
+.hud-label { font-size: 11px; }
+.hud-sub {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--green);
+  text-shadow: 0 0 12px rgba(94, 255, 177, .3);
+}
+.hud-sub b { color: #c8ffdf; }
+
+.hud-chip { font-size: 11px; letter-spacing: .04em; }
+
+/* ============ medidores ============ */
+.meter-slot { position: relative; border-color: rgba(255, 255, 255, .09); }
+.meter-slot::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px;
+  border-radius: 999px; background: linear-gradient(180deg, var(--gold2), var(--gold)); opacity: .8;
+}
+.meter-label { font-size: 10px; padding-left: 8px; }
+.meter-bar { height: 7px; background: rgba(255, 255, 255, .07); }
+.meter-sub { font-size: 10.5px; padding-left: 8px; }
+
+/* próximo objetivo vira um destaque real */
+.hud-goal {
+  margin-top: 8px; padding: 7px 12px; font-size: 11.5px; color: var(--text);
+  background: linear-gradient(90deg, rgba(255, 215, 0, .1), rgba(255, 215, 0, .03));
+  border: 1px solid rgba(255, 215, 0, .25); border-radius: 10px;
+}
+.hud-goal .goal-go {
+  font-family: var(--font-display);
+  text-shadow: 0 0 10px rgba(255, 215, 0, .5);
+}
+
+/* ============ hero / thiego ============ */
+.farm-thiego {
+  border-radius: 46% 46% 22px 22px / 34% 34% 22px 22px;
+  border-color: rgba(255, 215, 0, .4);
+  box-shadow: var(--shadow), 0 0 60px rgba(200, 107, 255, .14), 0 0 26px rgba(255, 215, 0, .12);
+  animation: auraBreath 4s ease-in-out infinite;
+}
+.farm-thiego.pressed { animation: none; box-shadow: 0 0 34px rgba(255, 215, 0, .35), 0 0 80px rgba(200, 107, 255, .22); }
+.farm-thiego .farm-title {
+  padding: 42px 10px 14px; font-size: 17px; letter-spacing: .14em;
+  font-family: var(--font-display);
+  text-shadow: 0 0 14px rgba(255, 215, 0, .55), 0 2px 6px rgba(0, 0, 0, .8);
+}
+.farm-multiline {
+  font-family: var(--font-display); font-size: 14px; letter-spacing: .08em;
+}
+
+/* ============ abas (consolidado com ui.css) ============ */
+.tdf-tabs {
+  position: relative; padding-bottom: 14px;
+  /* mobile-first: scroll horizontal nativo (17 abas não cabem) */
+  display: flex; flex-wrap: nowrap; gap: 6px;
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 10px;
+}
+.tdf-tabs::-webkit-scrollbar { height: 4px; }
+.tdf-tabs::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, .25); border-radius: 999px; }
+.tab-btn.nav-link {
+  padding: 10px 15px; border-radius: 10px; font-size: 12.5px; letter-spacing: .05em;
+  background: rgba(43, 26, 71, .55); transition: transform .08s, background .15s, border-color .15s, color .15s;
+  flex: 0 0 auto; white-space: nowrap;
+}
+.tab-btn.nav-link:hover { color: var(--text); border-color: var(--gold2); }
+.tab-btn.nav-link:active { transform: scale(.96); }
+.tab-btn.nav-link.active {
+  color: #1a1200; background: linear-gradient(135deg, var(--gold2), var(--gold));
+  border-color: var(--gold); box-shadow: 0 3px 14px rgba(255, 215, 0, .3);
+}
+.tdf-tabs::after {
+  content: ''; position: sticky; right: -2px; flex: none; width: 42px; height: 34px;
+  background: linear-gradient(90deg, transparent, rgba(18, 10, 30, .92));
+  pointer-events: none; align-self: center;
+}
+
+/* ============ cards ============ */
+.up-card, .gen-card, .miss-card, .set-row, .stats-table, .graph-box, .tree-card {
+  background: linear-gradient(180deg, rgba(43, 26, 71, .5), rgba(34, 20, 56, .92));
+}
+.up-name, .gen-name, .evo-name, .miss-name { font-size: 14.5px; }
+.up-card.buyable, .gen-card.buyable {
+  border-color: rgba(255, 215, 0, .65);
+  box-shadow: 0 0 0 1px rgba(255, 215, 0, .25), 0 0 18px rgba(255, 215, 0, .14);
+}
+.up-card.buyable .up-buy .btn { animation: evtPulse 1.6s infinite; }
+.gen-card.buyable .gen-cost { animation: evtPulse 1.6s infinite; }
+
+/* evolução comprável: destaque + CTA */
+.evo-card.buyable {
+  border-color: rgba(255, 215, 0, .75);
+  box-shadow: 0 0 0 1px rgba(255, 215, 0, .3), 0 0 24px rgba(255, 215, 0, .2);
+}
+.evo-card.buyable .evo-cost::after {
+  content: 'EVOLUIR →'; margin-left: 8px; font-size: 10.5px; font-weight: 900;
+  letter-spacing: .1em; color: var(--green); text-shadow: 0 0 10px rgba(94, 255, 177, .4);
+}
+.evo-card.locked:hover { border-color: var(--gold2); transform: translateY(-1px); }
+.evo-card { transition: transform .12s, border-color .15s, box-shadow .15s; }
+.evo-card.locked:active { transform: scale(.98); }
+
+/* ============ botões ============ */
+.btn { letter-spacing: .05em; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: scale(.96); }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  box-shadow: 0 3px 14px rgba(255, 215, 0, .28);
+}
+
+/* ============ números em destaque ============ */
+.gen-cost, .evo-cost, .up-lvl, .rank-score, .stat-row b {
+  font-family: var(--font-display); font-variant-numeric: tabular-nums;
+}
+
+/* ============ sidebar de navegação (desktop) ============ */
+@media (min-width: 1024px) {
+  .app { display: grid; grid-template-columns: 180px 1fr; gap: 16px; max-width: 1140px; align-items: start; }
+  .tdf-header { grid-column: 1 / -1; position: static; background: none; backdrop-filter: none; padding-bottom: 4px; }
+  .exp-hud { grid-column: 1 / -1; }
+  .tdf-tabs {
+    grid-column: 1; grid-row: 3;
+    flex-direction: column; gap: 4px; overflow-x: visible; overflow-y: auto;
+    position: sticky; top: 12px; max-height: calc(100vh - 24px);
+    padding: 10px; margin: 0;
+    background: linear-gradient(180deg, rgba(43, 26, 71, .6), rgba(24, 12, 48, .9));
+    border: 1px solid var(--line); border-radius: 16px;
+  }
+  .tdf-tabs::after { display: none; }
+  .tab-btn.nav-link {
+    width: 100%; text-align: left; justify-content: flex-start;
+    padding: 10px 12px; font-size: 12.5px;
+  }
+  .tab-btn.nav-link.active { box-shadow: 0 3px 14px rgba(255, 215, 0, .3); }
+  .tdf-content { grid-column: 2; grid-row: 3; min-width: 0; }
+}
+
+@media (min-width: 1280px) {
+  .app { grid-template-columns: 200px 1fr; }
+}
+
+/* ============ tablet (aba horizontal em vez de sidebar apertada) ============ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tab-btn.nav-link { padding: 10px 15px; font-size: 12.5px; }
+}
+
+/* ============ mobile ============ */
+@media (max-width: 767.98px) {
+  .hud-value { font-size: 30px; }
+  .hud-sub { font-size: 13px; }
+  .tab-btn.nav-link { padding: 9px 12px; font-size: 11.5px; }
+  .farm-thiego { width: min(300px, 88vw); }
+}
+
+@keyframes auraBreath {
+  0%, 100% { box-shadow: var(--shadow), 0 0 60px rgba(200, 107, 255, .14), 0 0 26px rgba(255, 215, 0, .12); }
+  50% { box-shadow: var(--shadow), 0 0 70px rgba(200, 107, 255, .22), 0 0 40px rgba(255, 215, 0, .2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .farm-thiego, .up-card.buyable .up-buy .btn, .gen-card.buyable .gen-cost,
+  .evo-card.buyable, .hud-goal .goal-go { animation: none; }
+}

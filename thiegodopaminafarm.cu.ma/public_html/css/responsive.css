@@ -1,0 +1,44 @@
+/* ============================================================
+   THIEGO DOPAMINA FARM — responsive.css
+   Complementa as utilities responsivas do Bootstrap 5.3
+   para cenários específicos do jogo.
+   ============================================================ */
+
+/* --- Mobile: meters em coluna, cards com wrap --- */
+@media (max-width: 767.98px) {
+  .app { padding: 8px 8px 30px; }
+  .hud-meters { gap: 6px; }
+  .meter-slot { display: flex; align-items: center; gap: 8px; }
+  .meter-label { margin-bottom: 0; flex: 1; }
+  .meter-bar { flex: 2; }
+  .meter-sub { display: none; }
+  .farm-thiego { width: min(300px, 88vw); }
+  .up-card { flex-wrap: wrap; }
+  .up-buy { margin-left: auto; }
+  .set-row input[type="range"] { width: 90px; }
+  .enc-card img { width: 120px; height: 120px; }
+
+  /* --- HUD P1: savebar compacta no celular --- */
+  .hud-savebar { gap: 6px; margin-top: 6px; }
+  .save-now-btn { padding: 4px 10px; font-size: 10px; }
+  .admin-mode-btn { padding: 4px 10px; font-size: 10px; }
+  .save-status { font-size: 10px; max-width: 42vw; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; }
+}
+
+/* --- Small mobile --- */
+@media (max-width: 420px) {
+  .hud-value { font-size: 24px; }
+  .tab-btn.nav-link { padding: 8px 11px; font-size: 11px; }
+  .gen-buys .btn { padding: 8px 4px; }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,20 @@
+# Environment files - contain secrets
+.env
+.env.*
+.env.local
+.env.production
+.env.staging
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

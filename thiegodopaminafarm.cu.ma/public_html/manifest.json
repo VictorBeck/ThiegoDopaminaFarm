@@ -1,0 +1,17 @@
+{
+  "name": "THIEGO DOPAMINA FARM",
+  "short_name": "TDF",
+  "description": "A fazenda de dopamina do Thiego — clique, produza, evolua, ascenda. INFINITO.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050a14",
+  "theme_color": "#050a14",
+  "orientation": "portrait",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["games", "entertainment"],
+  "screenshots": []
+}

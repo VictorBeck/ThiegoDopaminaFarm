@@ -1,0 +1,14 @@
+[package]
+name = "tdf_wasm"
+version = "0.1.0"
+edition = "2021"
+description = "THIEGO DOPAMINA FARM — motor determinístico (RNG + log10 + validação)"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+
+[profile.release]
+opt-level = "s"
+lto = true

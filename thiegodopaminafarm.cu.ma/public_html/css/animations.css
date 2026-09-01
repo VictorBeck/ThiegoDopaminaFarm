@@ -1,0 +1,44 @@
+/* ============================================================
+   THIEGO DOPAMINA FARM — animations.css
+   ============================================================ */
+@keyframes tabIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@keyframes evtPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, .5); }
+  50% { box-shadow: 0 0 14px 3px rgba(255, 215, 0, .25); }
+}
+
+@keyframes freshPop {
+  0% { transform: scale(.92); filter: brightness(1.3); }
+  60% { transform: scale(1.03); }
+  100% { transform: none; filter: none; }
+}
+.farm-thiego img.fresh { animation: freshPop .45s ease-out; }
+
+@keyframes ovIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ovOut { to { opacity: 0; } }
+@keyframes ovImg {
+  from { transform: scale(1) rotate(-1deg); }
+  to { transform: scale(1.06) rotate(1deg); }
+}
+@keyframes glitch {
+  0% { transform: translate(0); filter: hue-rotate(0); }
+  25% { transform: translate(-4px, 2px); filter: hue-rotate(60deg) saturate(3); }
+  50% { transform: translate(4px, -2px); filter: hue-rotate(-60deg); }
+  75% { transform: translate(-2px, -2px); filter: saturate(4); }
+  100% { transform: translate(2px, 2px); filter: hue-rotate(0); }
+}
+
+@keyframes humorFade {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
